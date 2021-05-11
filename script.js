@@ -28,8 +28,8 @@ startButton.addEventListener('click', startQuiz)
 function startQuiz() {
   console.log('started');
   startButton.classList.add('hide');
-  currentQuestion = questions;
-  currentQuestionIndex = 0
+  currentQuestion = questions.sort();
+  currentQuestionIndex = [0]
   questionContainerElement.classList.remove('hide');
   setNextQuestion()
 }

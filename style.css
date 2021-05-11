@@ -9,7 +9,19 @@
   --hue--correct: 145;
 }
 
-body {
+
+/* header div */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 60px;
+  font-size: larger;
+  font-weight: bold;
+
+}
+
+/* body {
   --hue: var(var(--hue-neutral));
   padding: 0;
   margin: 0;
@@ -19,7 +31,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: hsl(var(--hue), 100%, 20%);
-}
+} */
 
 body.correct {
   --hue: var(--hue--correct);
@@ -34,8 +46,16 @@ body.wrong {
   max-width: 80%;
   background-color: white;
   border-radius: 5px;
-  padding: 10px;
+  /* padding: 10px; */
   box-shadow: 0 0 10px 2px;
+  padding: 0;
+  margin: auto;
+  display: flex;
+  width: 100vh;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
 }
 
 .btn-grid {
@@ -81,4 +101,15 @@ body.wrong {
 
 .hide {
   display: none;
+}
+
+/* footer div */
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 60px;
+  font-size: larger;
+  font-weight: bold;
+
 }
