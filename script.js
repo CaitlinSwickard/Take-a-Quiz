@@ -15,12 +15,33 @@ const startButton = document.getElementById('start-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonElement = document.getElementById('answer-buttons')
+const timeEl = document.querySelector(".time");
+
+let currentQuestion = ('questions')
 
 
-let currentQuestion, currentQuestionIndex
 
-
+// event listener for click to start quiz
 startButton.addEventListener('click', startQuiz)
+
+
+
+
+
+// NEED TO ADD EVENT LISTENER FOR THE TIMER TO START WHEN START BUTTON IS PRESSED
+// timer seconds
+let secondsLeft = 60;
+// function to start timer set in a variable
+let timerInterval = setInterval(function () {
+  secondsLeft--;
+  timeEl.textContent = secondsLeft + ' seconds left';
+
+  if (secondsLeft === 0) {
+    // stops the clock at 0
+    clearInterval(timerInterval);
+  }
+}, 1000);
+
 
 
 
@@ -28,74 +49,84 @@ startButton.addEventListener('click', startQuiz)
 function startQuiz() {
   console.log('started');
   startButton.classList.add('hide');
-  currentQuestion = questions.sort();
-  currentQuestionIndex = [0]
-  questionContainerElement.classList.remove('hide');
-  setNextQuestion()
-}
-
-
-
-function setNextQuestion() {
-  showQuestions(currentQuestion);
-}
-
-
-
-function showQuestions(question) {
-  questionElement.innerText = questions.question
-  question.answers.forEach(answer => {
-    const button = document.createElement('button')
-    button.innerText = answer.text
-    button.classList.add('btn')
-    if (answer.correct) {
-      button.dataset.correct = answer.correct
-    }
-  })
-}
-
-
-
-
-function selectAnswer() {
-
-}
-
-let questions = [
-  {
-    question: 'What is 1 + 1?',
-    answer: [
-      { text: '11', correct: false },
-      { text: '111', correct: false },
-      { text: '2', correct: true },
-      { text: '4', correct: false },
-    ]
-  },
-  {
-    question: 'What is 3 + 3?',
-    answer: [
-      { text: '6', correct: true },
-      { text: '9', correct: false },
-      { text: '3', correct: false },
-      { text: '33', correct: false },
-    ]
-  },
-  {
-    question: 'What is 6 + 6?',
-    answer: [
-      { text: '66', correct: false },
-      { text: '12', correct: true },
-      { text: '9', correct: false },
-      { text: '3', correct: false },
-    ]
-  },
-  {
-    question: 'What is 4 + 4?',
-    answer: [
-      { text: '7', correct: false },
-      { text: '8', correct: true },
-      { text: '9', correct: false },
-      { text: '10', correct: false },
-    ]
+  for (let i = 0; i < questions.length; i++) {
+    const currentQuestion = questions[i];
+    questionContainerElement.classList.remove('hide');
+    setNextQuestion()
   }
-];
+
+
+
+
+
+
+  function setNextQuestion() {
+    showQuestions(currentQuestion);
+  }
+
+
+
+
+
+  function showQuestions(question) {
+    questionElement.innerText = questions.question
+    question.answers.forEach(answer => {
+      const button = document.createElement('button')
+      button.innerText = answer.text
+      button.classList.add('btn')
+      if (answer.correct) {
+        button.dataset.correct = answer.correct
+      }
+    })
+  }
+
+
+
+
+  function selectAnswer() {
+
+  }
+
+
+
+
+
+  const questions = [
+    {
+      question: 'What is 1 + 1?',
+      answer: [
+        { text: '11', correct: false },
+        { text: '111', correct: false },
+        { text: '2', correct: true },
+        { text: '4', correct: false },
+      ]
+    },
+    {
+      question: 'What is 3 + 3?',
+      answer: [
+        { text: '6', correct: true },
+        { text: '9', correct: false },
+        { text: '3', correct: false },
+        { text: '33', correct: false },
+      ]
+    },
+    {
+      question: 'What is 6 + 6?',
+      answer: [
+        { text: '66', correct: false },
+        { text: '12', correct: true },
+        { text: '9', correct: false },
+        { text: '3', correct: false },
+      ]
+    },
+    {
+      question: 'What is 4 + 4?',
+      answer: [
+        { text: '7', correct: false },
+        { text: '8', correct: true },
+        { text: '9', correct: false },
+        { text: '10', correct: false },
+      ]
+    }
+  ]
+}
