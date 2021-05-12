@@ -14,9 +14,7 @@
 const startButton = document.getElementById('start-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
-const answerButtonElement = document.getElementById('answer-buttons')
-const timeEl = document.querySelector(".time");
-
+const timeEl = document.querySelector(".timer");
 
 
 
@@ -128,3 +126,32 @@ const questions = [
     ]
   }
 ]
+
+
+
+
+
+
+
+// this is start of high score form (PROJECT 26 WEEK 4 for info)
+
+// var scoreInput = document.querySelector("#score");
+// var scoreForm = document.querySelector("#score-form");
+// var scoreList = document.querySelector("#score-list");
+// var scoreCountSpan = document.querySelector("#score-count");
+
+// var scores = [];
+
+// function renderScores() {
+//   scoreList.innerHTML = "";
+//   scoreCountSpan.textContent = scores.length;
+
+//   for (var i = 0; i < scores.length; i++) {
+//     var score = scores[i];
+//     var li = document.createElement('li');
+//     li.textContent = score;
+//     li.setAttribute('data-index', i);
+//     var button = document.createElement('button');
+//     button.textContent = 
+//   }
+// }

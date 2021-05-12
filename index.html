@@ -9,34 +9,40 @@
   <title>Quiz</title>
 </head>
 
+
+
+
 <header class="header">
-  <div>Time:</div>
-  <div class="time"></div>
+  <!-- view previous scores -->
+  <div class="scores"><a href="">View All Scores</a></div>
+  <!-- timer -->
+  <div class="timer">Time: <span id="time">0</span></div>
 </header>
 
 <body>
-  <div class="container">
-    <!-- question card container -->
-    <div id="question-container" class="hide">
-      <div id="question">Question</div>
-      <!-- answer buttons to click -->
-      <div id="answer-buttons" class="btn-grid">
-        <button class="btn">Answer 1</button>
-        <button class="btn">Answer 2</button>
-        <button class="btn">Answer 3</button>
-        <button class="btn">Answer 4</button>
-      </div>
-    </div>
-    <!-- buttons for start game and next question -->
-    <div class="controls">
-      <button id="start-btn" class="start-btn btn">START</button>
-      <button id="next-btn" class="next-btn btn hide">NEXT</button>
-    </div>
+  <!-- opening instruction container -->
+  <div id="instruction" class="start">
+    <h1>Let's Take A Quiz!</h1>
+    <p>Answer the following questions within the time limit. For every question you answer wrong you will lose 10
+      seconds on the clock.</p>
+    <button id="start-btn">Start Quiz</button>
   </div>
 
-  <footer class="footer">
-    <div>View High Scores</div>
-  </footer>
+
+  <!-- question card container -->
+  <div id="question-container" class="hide">
+    <h2 id="question"></h2>
+    <div id="answers"></div>
+  </div>
+
+
+  <!--score card container  -->
+  <div id="score-keeper" class="hide">
+    <h2>Your score!</h2>
+    <p>Your final score is <span id="final-score"></span></p>
+    <p>Enter your initials: <input type="text" id="initials" /> <button id="submit">Submit Score!</button></p>
+  </div>
+
   <script src="script.js"></script>
 </body>
 
