@@ -11,11 +11,11 @@
 // THEN I can save my initials and my score
 
 
-const startButton = document.getElementById('start-btn')
-const questionContainerElement = document.getElementById('question-container')
-const questionElement = document.getElementById('question')
+const startButton = document.getElementById('start-btn');
+const questionContainerElement = document.getElementById('question-container');
+const questionElement = document.getElementById('question');
 const timeEl = document.querySelector(".timer");
-
+const instructionContainerElement = document.getElementById('instruction')
 
 
 
@@ -36,11 +36,10 @@ let timerInterval = setInterval(function () {
 
 
 
-
-
-
 // event listener for click to start quiz
 startButton.addEventListener('click', startQuiz)
+
+
 
 // function to start the quiz
 function startQuiz() {
@@ -49,7 +48,7 @@ function startQuiz() {
   secondsLeft = 60;
 
   questionContainerElement.classList.remove('hide');
-  setNextQuestion()
+
 }
 
 
