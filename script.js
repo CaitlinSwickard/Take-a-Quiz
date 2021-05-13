@@ -54,42 +54,25 @@ function startQuiz() {
 }
 
 
+function showQuestions() {
+  for (let i = 0; i < questions.length; i++) {
+    questionElement.innerText = questions.question
+    question.choices.array.forEach(element => {
+      const button = document.createElement('button')
+      button.innerText = choices.text
+      button.classList.add('btn')
+      if (choices.correct) {
+        setNextQuestion();
+      }
+
+    });
 
 
 
 
-function setNextQuestion() {
-  showQuestions();
-}
-
-
-
-
-
-function showQuestions(question) {
-  questionElement.innerText = questions.question
-  question.answers.forEach(answer => {
-    const button = document.createElement('button')
-    button.innerText = answer.text
-    button.classList.add('btn')
-    if (answer.correct) {
-      button.dataset.correct = answer.correct
+    function setNextQuestion() {
+      showQuestions();
     }
-  })
-}
-
-
-
-
-function selectAnswer() {
-
-}
-
-
-
-function endQuiz() {
-
-}
 
 
 
@@ -97,48 +80,66 @@ function endQuiz() {
 
 
 
-const questions = [
-  {
-    question: 'What is a value for boolean?',
-    choices: [
-      'True',
-      'Math.random',
-      'Function',
-      'Loop',
-    ],
-    correct: 'True'
-  },
-  {
-    question: 'How to we start flex box in css?',
-    choices: [
-      'align-self: flex-start',
-      'display: flex',
-      'flex-direction: row',
-      'flex-wrap: wrap',
-    ],
-    correct: 'display: flex'
-  },
-  {
-    question: 'How do we include jQuery in our webpage?',
-    choices: [
-      'With a NDC',
-      'With a function',
-      'With a CDN',
-      'With a method',
-    ],
-    correct: 'With a CDN',
-  },
-  {
-    question: 'What does DOM stand for?',
-    choices: [
-      'Document Object Method',
-      'Document Object Menu',
-      'Document Object Motherboard',
-      'Document Object Model',
-    ],
-    correct: 'Document Object Model',
-  }
-]
+
+
+    function selectAnswer() {
+
+    }
+
+
+
+    function endQuiz() {
+
+    }
+
+
+
+
+
+
+
+    const questions = [
+      {
+        question: 'What is a value for boolean?',
+        choices: [
+          'True',
+          'Math.random',
+          'Function',
+          'Loop',
+        ],
+        correct: 'True'
+      },
+      {
+        question: 'How to we start flex box in css?',
+        choices: [
+          'align-self: flex-start',
+          'display: flex',
+          'flex-direction: row',
+          'flex-wrap: wrap',
+        ],
+        correct: 'display: flex'
+      },
+      {
+        question: 'How do we include jQuery in our webpage?',
+        choices: [
+          'With a NDC',
+          'With a function',
+          'With a CDN',
+          'With a method',
+        ],
+        correct: 'With a CDN',
+      },
+      {
+        question: 'What does DOM stand for?',
+        choices: [
+          'Document Object Method',
+          'Document Object Menu',
+          'Document Object Motherboard',
+          'Document Object Model',
+        ],
+        correct: 'Document Object Model',
+      }
+    ]
 
 
 
@@ -150,60 +151,60 @@ const questions = [
 
 // score card page + adding scores to local storage and display
 
-const initialInput = document.querySelector("#initial-text");
-const scoreForm = document.querySelector("#score-form");
-const playerList = document.querySelector("#player-list");
-const playerCountSpan = document.querySelector("#player-count");
+// const initialInput = document.querySelector("#initial-text");
+// const scoreForm = document.querySelector("#score-form");
+// const playerList = document.querySelector("#player-list");
+// const playerCountSpan = document.querySelector("#player-count");
 
-let scores = [];
+// let scores = [];
 
-function renderScores() {
-  playerList.innerHTML = "";
-  playerCountSpan.textContent = scores.length;
-  for (var i = 0; i < scores.length; i++) {
-    var score = scores[i];
-    var li = document.createElement('li');
-    li.textContent = score;
-    playerList.appendChild(li);
-    console.log(scores);
-  }
-}
-
-function init() {
-  var storedPlayers = JSON.parse(localStorage.getItem("scores"));
-  if (storedPlayers !== null) {
-    scores = storedPlayers;
-  }
-  renderScores();
-}
-
-function storedPlayers() {
-  localStorage.setItem("scores", JSON.stringify(scores));
-}
-
-scoreForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  var initText = initialInput.value.trim();
-  if (initText === "") {
-    return;
-  }
-
-  scores.push(initText);
-  initialInput.value = "";
-
-  storedPlayers();
-  renderScores();
-
-});
-
-// playerList.addEventListener("click", function (event) {
-//   var element = event.target;
-//   if (element.matches("button") === true) {
-//     var index = element.parentElement.getAttribute("data-index");
-//     todos.splice(index, 1);
-//     storedPlayers();
-//     renderScores();
+// function renderScores() {
+//   playerList.innerHTML = "";
+//   playerCountSpan.textContent = scores.length;
+//   for (var i = 0; i < scores.length; i++) {
+//     var score = scores[i];
+//     var li = document.createElement('li');
+//     li.textContent = score;
+//     playerList.appendChild(li);
+//     console.log(scores);
 //   }
+// }
+
+// function init() {
+//   var storedPlayers = JSON.parse(localStorage.getItem("scores"));
+//   if (storedPlayers !== null) {
+//     scores = storedPlayers;
+//   }
+//   renderScores();
+// }
+
+// function storedPlayers() {
+//   localStorage.setItem("scores", JSON.stringify(scores));
+// }
+
+// scoreForm.addEventListener("submit", function (event) {
+//   event.preventDefault();
+//   var initText = initialInput.value.trim();
+//   if (initText === "") {
+//     return;
+//   }
+
+//   scores.push(initText);
+//   initialInput.value = "";
+
+//   storedPlayers();
+//   renderScores();
+
 // });
 
-init();
+// // playerList.addEventListener("click", function (event) {
+// //   var element = event.target;
+// //   if (element.matches("button") === true) {
+// //     var index = element.parentElement.getAttribute("data-index");
+// //     todos.splice(index, 1);
+// //     storedPlayers();
+// //     renderScores();
+// //   }
+// // });
+
+// init();
