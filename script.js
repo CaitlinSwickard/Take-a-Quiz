@@ -49,27 +49,44 @@ startButton.addEventListener('click', startQuiz)
 
 
 // function to start the quiz
-// this function should start the timer function when pressed and un hide the questions for the quiz
+// this function should start the timer function when pressed and un hide the questions for the quiz and hide the instruction screen
 function startQuiz() {
   console.log('started');
   secondsLeft = 60;
-  questionContainerElement.classList.remove('hide');
 
+  instructionContainerElement.style.display = "none";
 }
 
 
 function showQuestions() {
-  questionElement.innerText = questions.question
-  question.choices.array.forEach(element => {
-    const button = document.createElement('button')
-    button.innerText = choices.text
-    button.classList.add('btn')
-    if (choices.correct) {
-      setNextQuestion();
-    }
-    console.log(showQuestions)
-  });
+  questionContainerElement.classList.remove('hide');
+  for (let i = 0; i < questions.length; i++) {
+    const currentQuestion = questions[i];
+    questionElement.innerHTML = questions.question
+    question.choices.array.forEach(element => {
+      const button = document.createElement('button')
+      button.innerText = choices.text
+      // add class list and style buttons in css??
+      console.log(questions)
+    });
+  }
 }
+
+
+
+
+//   questionElement.innerHTML = questions.question
+//   question.choices.array.forEach(element => {
+//     const button = document.createElement('button')
+//     button.innerText = choices.text
+//     console.log(question)
+//     // add class list and style buttons in css??
+//     if (choices.correct) {
+//       setNextQuestion();
+//     }
+//   });
+// }
+
 // console.log(quiz) -- all questions -- hook this up to the button
 //console log just one question
 // add button to this show questions method
@@ -82,7 +99,7 @@ function showQuestions() {
 function setNextQuestion() {
   showQuestions();
   // loop though showQuestion() to go through each question
-  // if they answer wrong take 10 seconds off the timer function
+  // if they answer wrong take 10 seconds off the timer function. 
 }
 
 
