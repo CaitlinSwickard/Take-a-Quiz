@@ -26,9 +26,7 @@ const choiceElement = document.getElementById('choices');
 
 
 
-// WHY IS THIS SHOWING NAN???????
-// timer seconds
-let secondsLeft;
+
 // function to start timer set in a variable
 let timerInterval = setInterval(function () {
   secondsLeft--;
@@ -47,30 +45,27 @@ let timerInterval = setInterval(function () {
 startButton.addEventListener('click', startQuiz)
 
 
-
 // function to start the quiz
 // this function should start the timer function when pressed and un hide the questions for the quiz and hide the instruction screen
 function startQuiz() {
   console.log('started');
   secondsLeft = 60;
-
   instructionContainerElement.style.display = "none";
 }
 
 
 function showQuestions() {
+  // show questions to screen
   questionContainerElement.classList.remove('hide');
-  for (let i = 0; i < questions.length; i++) {
-    const currentQuestion = questions[i];
-    questionElement.innerHTML = questions.question
-    question.choices.array.forEach(element => {
-      const button = document.createElement('button')
-      button.innerText = choices.text
-      // add class list and style buttons in css??
-      console.log(questions)
-    });
+  // loop through question array
+  const question = questions.length
+  for (let i = 0; i < question.length; i++) {
+    console.log(questions[i])
+    questions.textContent = questions.question
   }
 }
+
+
 
 
 
@@ -176,62 +171,63 @@ const questions = [
 
 
 // score card page + adding scores to local storage and display
+// week 4 unit 26 example
 
 
-// const initialInput = document.querySelector("#initial-text");
-// const scoreForm = document.querySelector("#score-form");
-// const playerList = document.querySelector("#player-list");
-// const playerCountSpan = document.querySelector("#player-count");
+const initialInput = document.querySelector("#initial-text");
+const scoreForm = document.querySelector("#score-form");
+const playerList = document.querySelector("#player-list");
+const playerCountSpan = document.querySelector("#player-count");
 
-// let scores = [];
+let scores = [];
 
-// function renderScores() {
-//   playerList.innerHTML = "";
-//   playerCountSpan.textContent = scores.length;
-//   for (var i = 0; i < scores.length; i++) {
-//     var score = scores[i];
-//     var li = document.createElement('li');
-//     li.textContent = score;
-//     playerList.appendChild(li);
-//     console.log(scores);
+function renderScores() {
+  playerList.innerHTML = "";
+  playerCountSpan.textContent = scores.length;
+  for (var i = 0; i < scores.length; i++) {
+    var score = scores[i];
+    var li = document.createElement('li');
+    li.textContent = score;
+    playerList.appendChild(li);
+    console.log(scores);
+  }
+}
+
+function init() {
+  var storedPlayers = JSON.parse(localStorage.getItem("scores"));
+  if (storedPlayers !== null) {
+    scores = storedPlayers;
+  }
+  renderScores();
+}
+
+function storedPlayers() {
+  localStorage.setItem("scores", JSON.stringify(scores));
+}
+
+scoreForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  var initText = initialInput.value.trim();
+  if (initText === "") {
+    return;
+  }
+
+  scores.push(initText);
+  initialInput.value = "";
+
+  storedPlayers();
+  renderScores();
+
+});
+
+// playerList.addEventListener("click", function (event) {
+//   var element = event.target;
+//   if (element.matches("button") === true) {
+//     var index = element.parentElement.getAttribute("data-index");
+//     todos.splice(index, 1);
+//     storedPlayers();
+//     renderScores();
 //   }
-// }
-
-// function init() {
-//   var storedPlayers = JSON.parse(localStorage.getItem("scores"));
-//   if (storedPlayers !== null) {
-//     scores = storedPlayers;
-//   }
-//   renderScores();
-// }
-
-// function storedPlayers() {
-//   localStorage.setItem("scores", JSON.stringify(scores));
-// }
-
-// scoreForm.addEventListener("submit", function (event) {
-//   event.preventDefault();
-//   var initText = initialInput.value.trim();
-//   if (initText === "") {
-//     return;
-//   }
-
-//   scores.push(initText);
-//   initialInput.value = "";
-
-//   storedPlayers();
-//   renderScores();
-
 // });
 
-// // playerList.addEventListener("click", function (event) {
-// //   var element = event.target;
-// //   if (element.matches("button") === true) {
-// //     var index = element.parentElement.getAttribute("data-index");
-// //     todos.splice(index, 1);
-// //     storedPlayers();
-// //     renderScores();
-// //   }
-// // });
-
-// init();
+init();
