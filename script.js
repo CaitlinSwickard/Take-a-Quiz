@@ -22,7 +22,7 @@ const questionElement = document.getElementById('question');
 const choiceElement = document.getElementById('choices');
 
 
-
+let currentQuestionIndex = 0;
 
 
 
@@ -51,18 +51,18 @@ function startQuiz() {
   console.log('started');
   secondsLeft = 60;
   instructionContainerElement.style.display = "none";
+
+  showQuestions();
 }
 
 
 function showQuestions() {
   // show questions to screen
   questionContainerElement.classList.remove('hide');
-  // loop through question array
-  const question = questions.length
-  for (let i = 0; i < question.length; i++) {
-    console.log(questions[i])
-    questions.textContent = questions.question
-  }
+  // loop through question array DO NOT LOOP HERE!!!!!!
+  questionElement.textContent = questions[currentQuestionIndex].question
+
+
 }
 
 
@@ -220,14 +220,5 @@ scoreForm.addEventListener("submit", function (event) {
 
 });
 
-// playerList.addEventListener("click", function (event) {
-//   var element = event.target;
-//   if (element.matches("button") === true) {
-//     var index = element.parentElement.getAttribute("data-index");
-//     todos.splice(index, 1);
-//     storedPlayers();
-//     renderScores();
-//   }
-// });
 
 init();
