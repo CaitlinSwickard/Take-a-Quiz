@@ -1,3 +1,7 @@
+// AS A coding boot camp student
+// I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
+// SO THAT I can gauge my progress compared to my peers
+
 // GIVEN I am taking a code quiz
 // WHEN I click the start button
 // THEN a timer starts and I am presented with a question
@@ -45,103 +49,108 @@ startButton.addEventListener('click', startQuiz)
 
 
 // function to start the quiz
+// this function should start the timer function when pressed and un hide the questions for the quiz
 function startQuiz() {
   console.log('started');
   secondsLeft = 60;
-
   questionContainerElement.classList.remove('hide');
 
 }
 
 
 function showQuestions() {
-  for (let i = 0; i < questions.length; i++) {
-    questionElement.innerText = questions.question
-    question.choices.array.forEach(element => {
-      const button = document.createElement('button')
-      button.innerText = choices.text
-      button.classList.add('btn')
-      if (choices.correct) {
-        setNextQuestion();
-      }
-
-    });
-
-
-
-
-    function setNextQuestion() {
-      showQuestions();
+  questionElement.innerText = questions.question
+  question.choices.array.forEach(element => {
+    const button = document.createElement('button')
+    button.innerText = choices.text
+    button.classList.add('btn')
+    if (choices.correct) {
+      setNextQuestion();
     }
+    console.log(showQuestions)
+  });
+}
+// console.log(quiz) -- all questions -- hook this up to the button
+//console log just one question
+// add button to this show questions method
+// loop thru each question after clicking a button
+//identify the iterator to know which question to display next
+
+
+
+
+function setNextQuestion() {
+  showQuestions();
+  // loop though showQuestion() to go through each question
+  // if they answer wrong take 10 seconds off the timer function
+}
+
+
+
+
+
+function selectAnswer() {
+  // show if the answer was correct or wrong 
+  // Check answers input from end users and move to the next question
+
+}
+
+
+
+function endQuiz() {
+  // end quiz
+  // capture seconds left for score. Work with timer function??
+  // un hide render score form for input
+}
 
 
 
 
 
 
-
-
-
-    function selectAnswer() {
-
-    }
-
-
-
-    function endQuiz() {
-
-    }
-
-
-
-
-
-
-
-    const questions = [
-      {
-        question: 'What is a value for boolean?',
-        choices: [
-          'True',
-          'Math.random',
-          'Function',
-          'Loop',
-        ],
-        correct: 'True'
-      },
-      {
-        question: 'How to we start flex box in css?',
-        choices: [
-          'align-self: flex-start',
-          'display: flex',
-          'flex-direction: row',
-          'flex-wrap: wrap',
-        ],
-        correct: 'display: flex'
-      },
-      {
-        question: 'How do we include jQuery in our webpage?',
-        choices: [
-          'With a NDC',
-          'With a function',
-          'With a CDN',
-          'With a method',
-        ],
-        correct: 'With a CDN',
-      },
-      {
-        question: 'What does DOM stand for?',
-        choices: [
-          'Document Object Method',
-          'Document Object Menu',
-          'Document Object Motherboard',
-          'Document Object Model',
-        ],
-        correct: 'Document Object Model',
-      }
-    ]
-
-
+// array of questions for the quiz
+const questions = [
+  {
+    question: 'What is a value for boolean?',
+    choices: [
+      'True',
+      'Math.random',
+      'Function',
+      'Loop',
+    ],
+    correct: 'True'
+  },
+  {
+    question: 'How to we start flex box in css?',
+    choices: [
+      'align-self: flex-start',
+      'display: flex',
+      'flex-direction: row',
+      'flex-wrap: wrap',
+    ],
+    correct: 'display: flex'
+  },
+  {
+    question: 'How do we include jQuery in our webpage?',
+    choices: [
+      'With a NDC',
+      'With a function',
+      'With a CDN',
+      'With a method',
+    ],
+    correct: 'With a CDN',
+  },
+  {
+    question: 'What does DOM stand for?',
+    choices: [
+      'Document Object Method',
+      'Document Object Menu',
+      'Document Object Motherboard',
+      'Document Object Model',
+    ],
+    correct: 'Document Object Model',
+  }
+];
 
 
 
@@ -150,6 +159,7 @@ function showQuestions() {
 
 
 // score card page + adding scores to local storage and display
+
 
 // const initialInput = document.querySelector("#initial-text");
 // const scoreForm = document.querySelector("#score-form");
