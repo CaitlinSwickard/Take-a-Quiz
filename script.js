@@ -10,27 +10,30 @@
 // WHEN the game is over
 // THEN I can save my initials and my score
 
-
+const instructionContainerElement = document.getElementById('instruction')
 const startButton = document.getElementById('start-btn');
+const timeEl = document.querySelector(".timer");
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
-const timeEl = document.querySelector(".timer");
-const instructionContainerElement = document.getElementById('instruction')
+const choiceElement = document.getElementById('choices');
 
 
 
 
-// NEED TO ADD EVENT LISTENER FOR THE TIMER TO START WHEN START BUTTON IS PRESSED
+
+
+// WHY IS THIS SHOWING NAN???????
 // timer seconds
 let secondsLeft;
 // function to start timer set in a variable
 let timerInterval = setInterval(function () {
   secondsLeft--;
-  timeEl.textContent = secondsLeft + ' seconds left';
+  timeEl.textContent = 'Time: ' + secondsLeft;
 
   if (secondsLeft === 0) {
     // stops the clock at 0
     clearInterval(timerInterval);
+    endQuiz();
   }
 }, 1000);
 
@@ -44,7 +47,6 @@ startButton.addEventListener('click', startQuiz)
 // function to start the quiz
 function startQuiz() {
   console.log('started');
-  startButton.classList.add('hide');
   secondsLeft = 60;
 
   questionContainerElement.classList.remove('hide');
@@ -85,44 +87,56 @@ function selectAnswer() {
 
 
 
+function endQuiz() {
+
+}
+
+
+
+
+
 
 
 const questions = [
   {
-    question: 'What is 1 + 1?',
-    answer: [
-      { text: '11', correct: false },
-      { text: '111', correct: false },
-      { text: '2', correct: true },
-      { text: '4', correct: false },
-    ]
+    question: 'What is a value for boolean?',
+    choices: [
+      'True',
+      'Math.random',
+      'Function',
+      'Loop',
+    ],
+    correct: 'True'
   },
   {
-    question: 'What is 3 + 3?',
-    answer: [
-      { text: '6', correct: true },
-      { text: '9', correct: false },
-      { text: '3', correct: false },
-      { text: '33', correct: false },
-    ]
+    question: 'How to we start flex box in css?',
+    choices: [
+      'align-self: flex-start',
+      'display: flex',
+      'flex-direction: row',
+      'flex-wrap: wrap',
+    ],
+    correct: 'display: flex'
   },
   {
-    question: 'What is 6 + 6?',
-    answer: [
-      { text: '66', correct: false },
-      { text: '12', correct: true },
-      { text: '9', correct: false },
-      { text: '3', correct: false },
-    ]
+    question: 'How do we include jQuery in our webpage?',
+    choices: [
+      'With a NDC',
+      'With a function',
+      'With a CDN',
+      'With a method',
+    ],
+    correct: 'With a CDN',
   },
   {
-    question: 'What is 4 + 4?',
-    answer: [
-      { text: '7', correct: false },
-      { text: '8', correct: true },
-      { text: '9', correct: false },
-      { text: '10', correct: false },
-    ]
+    question: 'What does DOM stand for?',
+    choices: [
+      'Document Object Method',
+      'Document Object Menu',
+      'Document Object Motherboard',
+      'Document Object Model',
+    ],
+    correct: 'Document Object Model',
   }
 ]
 
@@ -132,25 +146,64 @@ const questions = [
 
 
 
-// this is start of high score form (PROJECT 26 WEEK 4 for info)
 
-// var scoreInput = document.querySelector("#score");
-// var scoreForm = document.querySelector("#score-form");
-// var scoreList = document.querySelector("#score-list");
-// var scoreCountSpan = document.querySelector("#score-count");
 
-// var scores = [];
+// score card page + adding scores to local storage and display
 
-// function renderScores() {
-//   scoreList.innerHTML = "";
-//   scoreCountSpan.textContent = scores.length;
+const initialInput = document.querySelector("#initial-text");
+const scoreForm = document.querySelector("#score-form");
+const playerList = document.querySelector("#player-list");
+const playerCountSpan = document.querySelector("#player-count");
 
-//   for (var i = 0; i < scores.length; i++) {
-//     var score = scores[i];
-//     var li = document.createElement('li');
-//     li.textContent = score;
-//     li.setAttribute('data-index', i);
-//     var button = document.createElement('button');
-//     button.textContent = 
+let scores = [];
+
+function renderScores() {
+  playerList.innerHTML = "";
+  playerCountSpan.textContent = scores.length;
+  for (var i = 0; i < scores.length; i++) {
+    var score = scores[i];
+    var li = document.createElement('li');
+    li.textContent = score;
+    playerList.appendChild(li);
+    console.log(scores);
+  }
+}
+
+function init() {
+  var storedPlayers = JSON.parse(localStorage.getItem("scores"));
+  if (storedPlayers !== null) {
+    scores = storedPlayers;
+  }
+  renderScores();
+}
+
+function storedPlayers() {
+  localStorage.setItem("scores", JSON.stringify(scores));
+}
+
+scoreForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  var initText = initialInput.value.trim();
+  if (initText === "") {
+    return;
+  }
+
+  scores.push(initText);
+  initialInput.value = "";
+
+  storedPlayers();
+  renderScores();
+
+});
+
+// playerList.addEventListener("click", function (event) {
+//   var element = event.target;
+//   if (element.matches("button") === true) {
+//     var index = element.parentElement.getAttribute("data-index");
+//     todos.splice(index, 1);
+//     storedPlayers();
+//     renderScores();
 //   }
-// }
+// });
+
+init();
