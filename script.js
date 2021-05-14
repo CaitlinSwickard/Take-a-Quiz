@@ -22,9 +22,8 @@ const questionElement = document.getElementById('question');
 const choiceElement = document.getElementById('choices');
 
 
-let currentQuestionIndex = 0;
 
-
+let currentQuestionIndex = 0
 
 
 // function to start timer set in a variable
@@ -35,7 +34,7 @@ let timerInterval = setInterval(function () {
   if (secondsLeft === 0) {
     // stops the clock at 0
     clearInterval(timerInterval);
-    endQuiz();
+    // endQuiz();
   }
 }, 1000);
 
@@ -45,8 +44,7 @@ let timerInterval = setInterval(function () {
 startButton.addEventListener('click', startQuiz)
 
 
-// function to start the quiz
-// this function should start the timer function when pressed and un hide the questions for the quiz and hide the instruction screen
+// function to start the quiz and timer / un hide the questions /hide the instruction screen
 function startQuiz() {
   console.log('started');
   secondsLeft = 60;
@@ -55,32 +53,38 @@ function startQuiz() {
   showQuestions();
 }
 
-
 function showQuestions() {
   // show questions to screen
-  questionContainerElement.classList.remove('hide');
-  // loop through question array DO NOT LOOP HERE!!!!!!
-  questionElement.textContent = questions[currentQuestionIndex].question
-
-
+  questionContainerElement.classList.remove("hide");
+  // adding text content
+  questionElement.textContent = questions[currentQuestionIndex].question;
+  // loop over choices
+  questions[currentQuestionIndex].choices.forEach(function (choice) {
+    console.log(choice);
+    // create new button for each choice
+    const choicesButton = document.createElement("button");
+    choicesButton.textContent = choice;
+    // display on the page
+    choiceElement.appendChild(choicesButton);
+    choicesButton.addEventListener('click', setNextQuestion)
+  });
 }
 
 
 
+function setNextQuestion() {
+  showQuestions(questions[currentQuestionIndex++])
+  // showQuestions(questions)
+  // showQuestions(currentQuestionIndex++);
+  console.log(setNextQuestion)
+}
 
 
 
-//   questionElement.innerHTML = questions.question
-//   question.choices.array.forEach(element => {
-//     const button = document.createElement('button')
-//     button.innerText = choices.text
-//     console.log(question)
-//     // add class list and style buttons in css??
-//     if (choices.correct) {
-//       setNextQuestion();
-//     }
-//   });
-// }
+// create a variable to look inside the choices and see how many there are, use that variable that will contian a number to loop over and create those buttons.
+// looping over the choices
+
+
 
 // console.log(quiz) -- all questions -- hook this up to the button
 //console log just one question
@@ -91,29 +95,22 @@ function showQuestions() {
 
 
 
-function setNextQuestion() {
-  showQuestions();
-  // loop though showQuestion() to go through each question
-  // if they answer wrong take 10 seconds off the timer function. 
-}
+// function selectedAnswer(e) {
+//   const selectedButton = e.target
+//   const correct = selectedButton.correct
+//   if (questions.length > currentQuestionIndex + 1)
+//     setNextQuestion();
+// };
+
+
+// function quizEnd() {
+
+// }
 
 
 
 
 
-function selectAnswer() {
-  // show if the answer was correct or wrong 
-  // Check answers input from end users and move to the next question
-
-}
-
-
-
-function endQuiz() {
-  // end quiz
-  // capture seconds left for score. Work with timer function??
-  // un hide render score form for input
-}
 
 
 
@@ -166,59 +163,60 @@ const questions = [
 
 
 
+function saveHighScores() {
 
-
-
-
-// score card page + adding scores to local storage and display
-// week 4 unit 26 example
-
-
-const initialInput = document.querySelector("#initial-text");
-const scoreForm = document.querySelector("#score-form");
-const playerList = document.querySelector("#player-list");
-const playerCountSpan = document.querySelector("#player-count");
-
-let scores = [];
-
-function renderScores() {
-  playerList.innerHTML = "";
-  playerCountSpan.textContent = scores.length;
-  for (var i = 0; i < scores.length; i++) {
-    var score = scores[i];
-    var li = document.createElement('li');
-    li.textContent = score;
-    playerList.appendChild(li);
-    console.log(scores);
-  }
 }
 
-function init() {
-  var storedPlayers = JSON.parse(localStorage.getItem("scores"));
-  if (storedPlayers !== null) {
-    scores = storedPlayers;
-  }
-  renderScores();
-}
 
-function storedPlayers() {
-  localStorage.setItem("scores", JSON.stringify(scores));
-}
-
-scoreForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  var initText = initialInput.value.trim();
-  if (initText === "") {
-    return;
-  }
-
-  scores.push(initText);
-  initialInput.value = "";
-
-  storedPlayers();
-  renderScores();
-
-});
+// // score card page + adding scores to local storage and display
+// // week 4 unit 26 example
 
 
-init();
+// const initialInput = document.querySelector("#initial-text");
+// const scoreForm = document.querySelector("#score-form");
+// const playerList = document.querySelector("#player-list");
+// const playerCountSpan = document.querySelector("#player-count");
+
+// let scores = [];
+
+// function renderScores() {
+//   playerList.innerHTML = "";
+//   playerCountSpan.textContent = scores.length;
+//   for (var i = 0; i < scores.length; i++) {
+//     var score = scores[i];
+//     var li = document.createElement('li');
+//     li.textContent = score;
+//     playerList.appendChild(li);
+//     console.log(scores);
+//   }
+// }
+
+// function init() {
+//   var storedPlayers = JSON.parse(localStorage.getItem("scores"));
+//   if (storedPlayers !== null) {
+//     scores = storedPlayers;
+//   }
+//   renderScores();
+// }
+
+// function storedPlayers() {
+//   localStorage.setItem("scores", JSON.stringify(scores));
+// }
+
+// scoreForm.addEventListener("submit", function (event) {
+//   event.preventDefault();
+//   var initText = initialInput.value.trim();
+//   if (initText === "") {
+//     return;
+//   }
+
+//   scores.push(initText);
+//   initialInput.value = "";
+
+//   storedPlayers();
+//   renderScores();
+
+// });
+
+
+// init();
