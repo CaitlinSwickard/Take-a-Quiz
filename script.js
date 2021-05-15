@@ -59,6 +59,7 @@ function showQuestions() {
   // adding text content
   questionElement.textContent = questions[currentQuestionIndex].question;
   // loop over choices
+  choiceElement.innerHTML = "";
   questions[currentQuestionIndex].choices.forEach(function (choice) {
     console.log(choice);
     // create new button for each choice
@@ -74,15 +75,12 @@ function showQuestions() {
 
 function setNextQuestion() {
   showQuestions(questions[currentQuestionIndex++])
-  // showQuestions(questions)
-  // showQuestions(currentQuestionIndex++);
   console.log(setNextQuestion)
 }
 
 
 
-// create a variable to look inside the choices and see how many there are, use that variable that will contian a number to loop over and create those buttons.
-// looping over the choices
+
 
 
 
