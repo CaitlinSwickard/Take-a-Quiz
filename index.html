@@ -27,7 +27,6 @@
       seconds on the clock.</p>
     <button id="start-btn">Start Quiz</button>
   </div>
-  <!-- HOW DO I ADD HIDE TO THIS ^ AFTER QUIZ STARTS?? -->
 
   <!-- question card container -->
   <div id="question-container" class="hide">
@@ -38,33 +37,25 @@
 
   <!--score card container  -->
 
-  <!-- <div id="score-keeper" class="hide">
-    <h2>Your score!</h2>
-    <p id="final-score">Your final score is </p>
-    <p>Enter your initials: <input type="text" id="initials" /> <button id="submit">Submit Score!</button></p>
-  </div> -->
-
-
-
-
-
-  <div id="score-keeper" class="hide">
-    <h1>Quiz Over!</h1>
-    <form id="score-form" method="POST">
-      <label for="initial-text">Add you initials: </label>
-      <input type="text" placeholder="add here" name="initial-text" id="initial-text" />
+  <div id="score-container" class="hide">
+    <div class="score-contents"></div>
+    <h1>Quiz Over!!!</h1>
+    <form>
+      <input placeholder="Type your initials here..." id="initials" />
+      <button id="submit">Submit</button>
+      <div>
+        <h3 id="scores-list"></h3>
+      </div>
     </form>
-    <p>Total Player Count: <span id="player-count">0</span></p>
-    <ul id="player-list"></ul>
+  </div>
 
 
 
 
 
-    <!-- jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- JS link page -->
-    <script src="script.js"></script>
+
+  <!-- JS link page -->
+  <script src="script.js"></script>
 </body>
 
 </html>

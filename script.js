@@ -14,6 +14,8 @@
 // WHEN the game is over
 // THEN I can save my initials and my score
 
+
+// variables for HTML elements
 const instructionContainerElement = document.getElementById('instruction')
 const startButton = document.getElementById('start-btn');
 const timeEl = document.querySelector(".timer");
@@ -21,9 +23,57 @@ const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const choiceElement = document.getElementById('choices');
 
-
-
 let currentQuestionIndex = 0
+
+
+
+// array of questions for the quiz
+const questions = [
+  {
+    question: 'Which one is a value for a boolean?',
+    choices: [
+      'True',
+      'Math.random',
+      'Function',
+      'Loop',
+    ],
+    correct: 'True'
+  },
+  {
+    question: 'How to we start flex box in css?',
+    choices: [
+      'align-self: flex-start',
+      'display: flex',
+      'flex-direction: row',
+      'flex-wrap: wrap',
+    ],
+    correct: 'display: flex'
+  },
+  {
+    question: 'How do we include jQuery in our webpage?',
+    choices: [
+      'With a NDC',
+      'With a function',
+      'With a CDN',
+      'With a method',
+    ],
+    correct: 'With a CDN',
+  },
+  {
+    question: 'What does DOM stand for?',
+    choices: [
+      'Document Object Method',
+      'Document Object Menu',
+      'Document Object Motherboard',
+      'Document Object Model',
+    ],
+    correct: 'Document Object Model',
+  }
+];
+
+
+
+
 
 let secondsLeft;
 // function to start timer set in a variable
@@ -79,18 +129,50 @@ function setNextQuestion() {
 
 
 
-
+// NOTHING PAST HERE WORKS!!!!!
 
 function checkAnswer(answer) {
-  if (question[currentQuestionIndex].correct == answer) {
-
-    console.log(checkAnswer)
+  // checking to see if answer clicked is correct
+  if (questions[currentQuestionIndex].correct == answer) {
+    console.log('answer is correct');
+    // if wrong take 10 seconds off the clock
+  } else {
+    (secondsLeft.value - 10)
   }
+}
+
+checkAnswer('True');
+
+
+
+
+// ends quiz when done and calls on score form to be filled out
+function quizEnd() {
+  if (currentQuestionIndex > questions.length)
+    highScores();
 }
 
 
 
 
+// variables fo HTML elements
+var submitEl = document.querySelector("#submit");
+var initialsInput = document.querySelector("#initials");
+var scoreListEl = document.querySelector("#score-list");
+var scoreContainerEl = document.getElementById("#score-container")
+
+// Action to be performed on click store in named function
+function highScores(event) {
+  scoreContainerEl.classList.remove("hide");
+  // Prevent default action
+  event.preventDefault();
+  console.log(event);
+  var response = initialsInput.value + " " + secondsLeft.value;
+  scoreListEl.textContent = score - list;
+}
+
+// Add listener to submit element
+submitEl.addEventListener("click", highScores);
 
 
 
@@ -98,123 +180,7 @@ function checkAnswer(answer) {
 
 
 
-// function quizEnd() {
-//   if (currentQuestionIndex < questions.length)
-//     showQuestion();
-//   else
-//     renderScores();
-// }
 
 
 
 
-
-
-
-
-
-
-// array of questions for the quiz
-const questions = [
-  {
-    question: 'Which one is a value for a boolean?',
-    choices: [
-      'True',
-      'Math.random',
-      'Function',
-      'Loop',
-    ],
-    correct: 'True'
-  },
-  {
-    question: 'How to we start flex box in css?',
-    choices: [
-      'align-self: flex-start',
-      'display: flex',
-      'flex-direction: row',
-      'flex-wrap: wrap',
-    ],
-    correct: 'display: flex'
-  },
-  {
-    question: 'How do we include jQuery in our webpage?',
-    choices: [
-      'With a NDC',
-      'With a function',
-      'With a CDN',
-      'With a method',
-    ],
-    correct: 'With a CDN',
-  },
-  {
-    question: 'What does DOM stand for?',
-    choices: [
-      'Document Object Method',
-      'Document Object Menu',
-      'Document Object Motherboard',
-      'Document Object Model',
-    ],
-    correct: 'Document Object Model',
-  }
-];
-
-
-
-
-
-
-// // score card page + adding scores to local storage and display
-// // week 4 unit 26 example
-// need to un hide this page at end of quiz
-
-
-// const initialInput = document.querySelector("#initial-text");
-// const scoreForm = document.querySelector("#score-form");
-// const playerList = document.querySelector("#player-list");
-// const playerCountSpan = document.querySelector("#player-count");
-// const scoreKeeperContainer = document.getElementById("#score-keeper");
-
-// let scores = [];
-
-// function renderScores() {
-//   scoreKeeperContainer.classList.remove("hide");
-//   playerList.innerHTML = "";
-//   playerCountSpan.textContent = scores.length;
-//   for (var i = 0; i < scores.length; i++) {
-//     var score = scores[i];
-//     var li = document.createElement('li');
-//     li.textContent = score;
-//     playerList.appendChild(li);
-//     console.log(scores);
-//   }
-// }
-
-// function init() {
-//   var storedPlayers = JSON.parse(localStorage.getItem("scores"));
-//   if (storedPlayers !== null) {
-//     scores = storedPlayers;
-//   }
-//   renderScores();
-// }
-
-// function storedPlayers() {
-//   localStorage.setItem("scores", JSON.stringify(scores));
-// }
-
-// scoreForm.addEventListener("submit", function (event) {
-//   event.preventDefault();
-//   var initText = initialInput.value.trim();
-//   if (initText === "") {
-//     return;
-//   }
-
-//   scores.push(initText);
-//   initialInput.value = "";
-
-//   storedPlayers();
-//   renderScores();
-
-// });
-
-
-// init();
