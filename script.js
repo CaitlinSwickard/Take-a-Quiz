@@ -25,7 +25,7 @@ const choiceElement = document.getElementById('choices');
 
 let currentQuestionIndex = 0
 
-
+let secondsLeft;
 // function to start timer set in a variable
 let timerInterval = setInterval(function () {
   secondsLeft--;
@@ -34,7 +34,7 @@ let timerInterval = setInterval(function () {
   if (secondsLeft === 0) {
     // stops the clock at 0
     clearInterval(timerInterval);
-    // endQuiz();
+    endQuiz();
   }
 }, 1000);
 
@@ -72,7 +72,6 @@ function showQuestions() {
 }
 
 
-
 function setNextQuestion() {
   showQuestions(questions[currentQuestionIndex++])
   console.log(setNextQuestion)
@@ -82,29 +81,29 @@ function setNextQuestion() {
 
 
 
+function checkAnswer(answer) {
+  if (question[currentQuestionIndex].correct == answer) {
+
+    console.log(checkAnswer)
+  }
+}
 
 
-// console.log(quiz) -- all questions -- hook this up to the button
-//console log just one question
-// add button to this show questions method
-// loop thru each question after clicking a button
-//identify the iterator to know which question to display next
 
 
 
 
-// function selectedAnswer(e) {
-//   const selectedButton = e.target
-//   const correct = selectedButton.correct
-//   if (questions.length > currentQuestionIndex + 1)
-//     setNextQuestion();
-// };
+
+
+
 
 
 // function quizEnd() {
-
+//   if (currentQuestionIndex < questions.length)
+//     showQuestion();
+//   else
+//     renderScores();
 // }
-
 
 
 
@@ -118,7 +117,7 @@ function setNextQuestion() {
 // array of questions for the quiz
 const questions = [
   {
-    question: 'What is a value for boolean?',
+    question: 'Which one is a value for a boolean?',
     choices: [
       'True',
       'Math.random',
@@ -161,23 +160,24 @@ const questions = [
 
 
 
-function saveHighScores() {
 
-}
 
 
 // // score card page + adding scores to local storage and display
 // // week 4 unit 26 example
+// need to un hide this page at end of quiz
 
 
 // const initialInput = document.querySelector("#initial-text");
 // const scoreForm = document.querySelector("#score-form");
 // const playerList = document.querySelector("#player-list");
 // const playerCountSpan = document.querySelector("#player-count");
+// const scoreKeeperContainer = document.getElementById("#score-keeper");
 
 // let scores = [];
 
 // function renderScores() {
+//   scoreKeeperContainer.classList.remove("hide");
 //   playerList.innerHTML = "";
 //   playerCountSpan.textContent = scores.length;
 //   for (var i = 0; i < scores.length; i++) {
