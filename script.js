@@ -1,18 +1,4 @@
-// AS A coding boot camp student
-// I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-// SO THAT I can gauge my progress compared to my peers
 
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
 
 
 // variables for HTML elements
@@ -75,7 +61,7 @@ const questions = [
 
 
 
-let secondsLeft;
+let secondsLeft = 60;
 // function to start timer set in a variable
 let timerInterval = setInterval(function () {
   secondsLeft--;
@@ -91,45 +77,56 @@ let timerInterval = setInterval(function () {
 
 
 // event listener for click to start quiz
-startButton.addEventListener('click', startQuiz)
+startButton.addEventListener('click', startQuiz);
 
 
-// function to start the quiz and timer / un hide the questions /hide the instruction screen
+// function to start the quiz and timer 
 function startQuiz() {
   console.log('started');
-  secondsLeft = 60;
+
+  // hides the instruction screen to allow questions to display
   instructionContainerElement.style.display = "none";
 
   showQuestions();
 }
 
 function showQuestions() {
-  // show questions to screen
-  questionContainerElement.classList.remove("hide");
-  // adding text content
-  questionElement.textContent = questions[currentQuestionIndex].question;
-  // loop over choices
-  choiceElement.innerHTML = "";
-  questions[currentQuestionIndex].choices.forEach(function (choice) {
-    console.log(choice);
-    // create new button for each choice
-    const choicesButton = document.createElement("button");
-    choicesButton.textContent = choice;
-    // display on the page
-    choiceElement.appendChild(choicesButton);
-    choicesButton.addEventListener('click', setNextQuestion)
-  });
+  if (currentQuestionIndex < questions.length) {
+    // show questions to screen
+    questionContainerElement.classList.remove("hide");
+    // adding text content
+    questionElement.textContent = questions[currentQuestionIndex].question;
+    // loop over choices
+    choiceElement.innerHTML = "";
+    questions[currentQuestionIndex].choices.forEach(function (choice) {
+      console.log(choice);
+      // create new button for each choice
+      const choicesButton = document.createElement("button");
+      choicesButton.textContent = choice;
+      // display on the page
+      choiceElement.appendChild(choicesButton);
+      // sets next question after a choice has been selected
+      choicesButton.addEventListener('click', function (event) {
+        checkAnswer(event.target.textContent);
+        setNextQuestion();
+      });
+
+    });
+  } else {
+    quizEnd();
+  }
 }
 
 
 function setNextQuestion() {
-  showQuestions(questions[currentQuestionIndex++])
-  console.log(setNextQuestion)
+  // sets index for next question
+  showQuestions(questions[currentQuestionIndex++]);
+  console.log(currentQuestionIndex);
 }
 
 
 
-// NOTHING PAST HERE WORKS!!!!!
+
 
 function checkAnswer(answer) {
   // checking to see if answer clicked is correct
@@ -137,7 +134,8 @@ function checkAnswer(answer) {
     console.log('answer is correct');
     // if wrong take 10 seconds off the clock
   } else {
-    (secondsLeft.value - 10)
+    (secondsLeft -= 10)
+
   }
 }
 
@@ -147,9 +145,12 @@ checkAnswer('True');
 
 
 // ends quiz when done and calls on score form to be filled out
+// what do i need to add here??
 function quizEnd() {
-  if (currentQuestionIndex > questions.length)
-    highScores();
+  // stop timer here
+  choiceElement.innerHTML = "";
+  questionElement.innerHTML = "";
+  highScores();
 }
 
 
@@ -159,19 +160,24 @@ function quizEnd() {
 var submitEl = document.querySelector("#submit");
 var initialsInput = document.querySelector("#initials");
 var scoreListEl = document.querySelector("#score-list");
-var scoreContainerEl = document.getElementById("#score-container")
+var scoreContainerEl = document.getElementById("score-container")
 
-// Action to be performed on click store in named function
+
+// Do i need an empty variable for seconds left on the clock??
+
+// function to capture initials and score (time left on clock)
 function highScores(event) {
+  // removes hide to display final screen
   scoreContainerEl.classList.remove("hide");
   // Prevent default action
   event.preventDefault();
   console.log(event);
+  // shows initials and score (time left on clock)
   var response = initialsInput.value + " " + secondsLeft.value;
-  scoreListEl.textContent = score - list;
+  scoreListEl.textContent = initials;
 }
 
-// Add listener to submit element
+// Add listener to submit 
 submitEl.addEventListener("click", highScores);
 
 
