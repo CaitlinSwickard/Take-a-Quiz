@@ -61,7 +61,7 @@ const questions = [
 
 
 
-let secondsLeft = 60;
+let secondsLeft;
 // function to start timer set in a variable
 let timerInterval = setInterval(function () {
   secondsLeft--;
@@ -70,7 +70,7 @@ let timerInterval = setInterval(function () {
   if (secondsLeft === 0) {
     // stops the clock at 0
     clearInterval(timerInterval);
-    endQuiz();
+    // endQuiz();
   }
 }, 1000);
 
@@ -83,7 +83,7 @@ startButton.addEventListener('click', startQuiz);
 // function to start the quiz and timer 
 function startQuiz() {
   console.log('started');
-
+  secondsLeft = 60;
   // hides the instruction screen to allow questions to display
   instructionContainerElement.style.display = "none";
 
@@ -96,8 +96,9 @@ function showQuestions() {
     questionContainerElement.classList.remove("hide");
     // adding text content
     questionElement.textContent = questions[currentQuestionIndex].question;
-    // loop over choices
+    // empties 'div' content for moving through choices
     choiceElement.innerHTML = "";
+    // loop over choices
     questions[currentQuestionIndex].choices.forEach(function (choice) {
       console.log(choice);
       // create new button for each choice
@@ -105,12 +106,13 @@ function showQuestions() {
       choicesButton.textContent = choice;
       // display on the page
       choiceElement.appendChild(choicesButton);
-      // sets next question after a choice has been selected
+      // checks to see if choice selected is correct
       choicesButton.addEventListener('click', function (event) {
+        // calls check answer function to check button clicked 
         checkAnswer(event.target.textContent);
+        // sets next question to appear 
         setNextQuestion();
       });
-
     });
   } else {
     quizEnd();
@@ -135,7 +137,6 @@ function checkAnswer(answer) {
     // if wrong take 10 seconds off the clock
   } else {
     (secondsLeft -= 10)
-
   }
 }
 
@@ -144,12 +145,15 @@ checkAnswer('True');
 
 
 
-// ends quiz when done and calls on score form to be filled out
-// what do i need to add here??
+// ends quiz when done, stops timer function and calls on score form to be filled out
 function quizEnd() {
-  // stop timer here
+  // empties 'div' elements 
   choiceElement.innerHTML = "";
   questionElement.innerHTML = "";
+  // stop timer here
+  if (currentQuestionIndex < questions.length) {
+    clearInterval();
+  }
   highScores();
 }
 
@@ -157,13 +161,13 @@ function quizEnd() {
 
 
 // variables fo HTML elements
-var submitEl = document.querySelector("#submit");
-var initialsInput = document.querySelector("#initials");
-var scoreListEl = document.querySelector("#score-list");
-var scoreContainerEl = document.getElementById("score-container")
+const submitEl = document.querySelector("#submit");
+const initialsInput = document.querySelector("#initials");
+const scoreListEl = document.querySelector("#score-list");
+const scoreContainerEl = document.getElementById("score-container")
 
 
-// Do i need an empty variable for seconds left on the clock??
+
 
 // function to capture initials and score (time left on clock)
 function highScores(event) {
@@ -173,8 +177,8 @@ function highScores(event) {
   event.preventDefault();
   console.log(event);
   // shows initials and score (time left on clock)
-  var response = initialsInput.value + " " + secondsLeft.value;
-  scoreListEl.textContent = initials;
+  const response = initialsInput.value + " " + secondsLeft;
+  scoreListEl.textContent = response;
 }
 
 // Add listener to submit 
