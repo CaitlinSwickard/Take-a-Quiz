@@ -139,28 +139,26 @@ function checkAnswer(answer) {
     (secondsLeft -= 10)
   }
 }
-
 checkAnswer('True');
 
 
 
 
-// ends quiz when done, stops timer function and calls on score form to be filled out
+// stops timer function and calls on score form to be filled out
 function quizEnd() {
+  // stops timer here
+  clearInterval(timerInterval);
   // empties 'div' elements 
   choiceElement.innerHTML = "";
   questionElement.innerHTML = "";
-  // stop timer here
-  if (currentQuestionIndex < questions.length) {
-    clearInterval();
-  }
+
   highScores();
 }
 
 
 
 
-// variables fo HTML elements
+// variables fo HTML elements for high score form
 const submitEl = document.querySelector("#submit");
 const initialsInput = document.querySelector("#initials");
 const scoreListEl = document.querySelector("#score-list");
@@ -179,7 +177,16 @@ function highScores(event) {
   // shows initials and score (time left on clock)
   const response = initialsInput.value + " " + secondsLeft;
   scoreListEl.textContent = response;
+  console.log(response);
 }
+
+
+// DO I NEED TO USE A FUNCTION LIKE THIS INSTEAD HERE??
+// function myFunction() {
+//   document.getElementById("frm1").submit();
+// }
+
+
 
 // Add listener to submit 
 submitEl.addEventListener("click", highScores);
