@@ -88,6 +88,7 @@ startButton.addEventListener('click', startQuiz);
 
 // function to start the quiz and timer 
 function startQuiz() {
+
   console.log('started');
   secondsLeft = 60;
   // hides the instruction screen to allow questions to display
@@ -97,6 +98,7 @@ function startQuiz() {
 }
 
 function showQuestions() {
+
   if (currentQuestionIndex < questions.length) {
     // show questions to screen
     questionContainerElement.classList.remove("hide");
@@ -127,6 +129,7 @@ function showQuestions() {
 
 
 function setNextQuestion() {
+
   // sets index for next question
   showQuestions(questions[currentQuestionIndex++]);
   console.log(currentQuestionIndex);
@@ -137,6 +140,7 @@ function setNextQuestion() {
 
 
 function checkAnswer(answer) {
+
   // checking to see if answer clicked is correct
   if (questions[currentQuestionIndex].correct == answer) {
     console.log('answer is correct');
@@ -152,6 +156,9 @@ checkAnswer('True');
 
 // stops timer function 
 function quizEnd() {
+
+  // removes hide to display final screen
+  scoreContainerEl.classList.remove("hide");
   // stops timer here
   clearInterval(timerInterval);
   // empties 'div' elements 
@@ -168,41 +175,70 @@ function quizEnd() {
 const submitEl = document.querySelector("#submit");
 const initialsInput = document.querySelector("#initials");
 const scoreListEl = document.querySelector("#score-list");
-const scoreContainerEl = document.getElementById("score-container")
+const scoreContainerEl = document.getElementById("score-container");
+
+
+
+function saveHighScore() {
+
+  // save form data as an object
+  const scores = {
+    initialsInput: initialsInput.value,
+    secondsLeft: secondsLeft.value
+  };
+}
+// Use .setItem() to store object in storage and JSON.stringify to convert it as a string - setting the whole array as 'scores'
+localStorage.setItem("scores", JSON.stringify(scores));
 
 
 
 
-// function to capture initials and score (time left on clock)
-function highScores(event) {
-  // removes hide to display final screen
-  scoreContainerEl.classList.remove("hide");
-  // Prevent default action
-  event.preventDefault();
-  console.log(event);
-  // shows initials and score (time left on clock)
-  const response = initialsInput.value + " " + secondsLeft;
-  scoreListEl.textContent = response;
-  console.log(response);
-  // store to local storage??
-  localStorage.setItem(response, secondsLeft);
+function setScores() {
+
+  // array for value from local storage or initialize an empty array
+  var highScores = JSON.parse(localStorage.getItem("scores") || [])
+  // Check if data is returned, if not exit out of the function
+  if (highScores !== null) {
+    const response = initialsInput.value + " " + secondsLeft.value;
+    scoreListEl.textContent = response;
+    //this pushes that string into the array
+    highScores.push(response);
+  } else {
+    return;
+  }
+  // Add listener event to submit button
+  submitEl.addEventListener("click", function (event) {
+    // Prevent default action of refresh on submit
+    event.preventDefault();
+    saveHighScore();
+    setScores();
+  });
 }
 
 
-// or does it need to be something like this??
-// document.getElementById("").value = localStorage.getItem("");
-
-
-
-
-// Add listener to submit 
-submitEl.addEventListener("click", highScores);
 
 
 
 
 
 
+
+  // // function to capture initials and score (time left on clock)
+  // function highScores(event) {
+  //   // removes hide to display final screen
+  //   scoreContainerEl.classList.remove("hide");
+  //   // Prevent default action
+  //   event.preventDefault();
+  //   console.log(event);
+  //   // shows initials and score (time left on clock)
+  //   const response = initialsInput.value + " " + secondsLeft;
+  //   scoreListEl.textContent = response;
+  //   console.log(response);
+  //   // store to local storage??
+  //   localStorage.setItem(response, secondsLeft);
+  // }
+  // // Add listener to submit 
+  // submitEl.addEventListener("click", highScores);
 
 
 
