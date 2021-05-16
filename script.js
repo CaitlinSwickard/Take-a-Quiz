@@ -1,10 +1,16 @@
+// possible css values - not working 
+// document.getElementById('question-container').style.cssText = "padding: 30px 30px; margin: auto; display: flex; width: 100vh; height: 80vh; justify-content: center; flex-direction: column; align-items: center;"
+// document.getElementById('score-container').style.cssText = "padding: 30px 30px; margin: auto; display: flex; width: 100vh; height: 80vh; justify-content: center; flex-direction: column; align-items: center;"
+
+
+
 
 
 
 // variables for HTML elements
 const instructionContainerElement = document.getElementById('instruction')
 const startButton = document.getElementById('start-btn');
-const timeEl = document.querySelector(".timer");
+const timeEl = document.querySelector('.timer');
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const choiceElement = document.getElementById('choices');
@@ -144,14 +150,14 @@ checkAnswer('True');
 
 
 
-// stops timer function and calls on score form to be filled out
+// stops timer function 
 function quizEnd() {
   // stops timer here
   clearInterval(timerInterval);
   // empties 'div' elements 
   choiceElement.innerHTML = "";
   questionElement.innerHTML = "";
-
+  // calls on score form to be filled out
   highScores();
 }
 
@@ -178,13 +184,14 @@ function highScores(event) {
   const response = initialsInput.value + " " + secondsLeft;
   scoreListEl.textContent = response;
   console.log(response);
+  // store to local storage??
+  localStorage.setItem(response, secondsLeft);
 }
 
 
-// DO I NEED TO USE A FUNCTION LIKE THIS INSTEAD HERE??
-// function myFunction() {
-//   document.getElementById("frm1").submit();
-// }
+// or does it need to be something like this??
+// document.getElementById("").value = localStorage.getItem("");
+
 
 
 

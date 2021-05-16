@@ -3,7 +3,10 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-
+/* hidden */
+.hide {
+  display: none;
+}
 
 /* header container */
 .header {
@@ -18,7 +21,9 @@
 
 /* instruction container */
 .start {
-  padding: 0;
+  background: #192a3b;
+  color: white;
+  padding: 30px 30px;
   margin: auto;
   display: flex;
   width: 100vh;
@@ -28,14 +33,15 @@
   align-items: center;
   
 }
-.btn {
-  
+
+
+#start-btn {
+  margin-top: 15px;
+  width: 80px;
+  height: 55px;
 }
 
 
 
-/* hidden */
-.hide {
-  display: none;
-}
+
 
