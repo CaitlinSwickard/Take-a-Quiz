@@ -28,7 +28,7 @@ const questions = [
       '3. Function',
       '4. Loop',
     ],
-    correct: 'True'
+    correct: '1. True'
   },
   {
     question: 'How do we start flex box in css?',
@@ -38,7 +38,7 @@ const questions = [
       '3. flex-direction: row',
       '4. flex-wrap: wrap',
     ],
-    correct: 'display: flex'
+    correct: '2. display: flex'
   },
   {
     question: 'How do we include jQuery in our webpage?',
@@ -48,7 +48,7 @@ const questions = [
       '3. With a CDN',
       '4. With a method',
     ],
-    correct: 'With a CDN',
+    correct: '3. With a CDN',
   },
   {
     question: 'What does DOM stand for?',
@@ -58,13 +58,13 @@ const questions = [
       '3. Document Object Motherboard',
       '4. Document Object Model',
     ],
-    correct: 'Document Object Model',
+    correct: '4. Document Object Model',
   }
 ];
 
 
 
-let secondsLeft;
+
 // function to start timer set in a variable
 let timerInterval = setInterval(function () {
   secondsLeft--;
