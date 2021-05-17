@@ -31,7 +31,7 @@ const questions = [
     correct: 'True'
   },
   {
-    question: 'How to we start flex box in css?',
+    question: 'How do we start flex box in css?',
     choices: [
       'align-self: flex-start',
       'display: flex',
@@ -87,7 +87,6 @@ startButton.addEventListener('click', startQuiz);
 // function to start the quiz and timer 
 function startQuiz() {
 
-  console.log('started');
   secondsLeft = 60;
   // hides the instruction screen to allow questions to display
   instructionContainerElement.style.display = "none";
@@ -106,7 +105,6 @@ function showQuestions() {
     choiceElement.innerHTML = "";
     // loop over choices
     questions[currentQuestionIndex].choices.forEach(function (choice) {
-      console.log(choice);
       // create new button for each choice
       const choicesButton = document.createElement("button");
       choicesButton.textContent = choice;
@@ -140,7 +138,6 @@ function checkAnswer(answer) {
 
   // checking to see if answer clicked is correct
   if (questions[currentQuestionIndex].correct == answer) {
-    console.log('answer is correct');
     // if wrong take 10 seconds off the clock
   } else {
     (secondsLeft -= 10)
@@ -160,8 +157,7 @@ function quizEnd() {
   // empties 'div' elements 
   choiceElement.innerHTML = "";
   questionElement.innerHTML = "";
-  // calls on score form to be filled out
-  saveHighScore();
+
 }
 
 
@@ -174,13 +170,15 @@ const scoreContainerEl = document.getElementById("score-container");
 
 
 
-function saveHighScore() {
+// Add listener event to submit button
+submitEl.addEventListener("click", function (event) {
+  // Prevent default action of refresh on submit
+  event.preventDefault();
+});
 
-  // Add listener event to submit button
-  submitEl.addEventListener("click", function (event) {
-    // Prevent default action of refresh on submit
-    event.preventDefault();
-  });
+
+
+function saveHighScore() {
 
   // save form data as an object
   const scores = {
