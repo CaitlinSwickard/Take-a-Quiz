@@ -204,7 +204,6 @@ function saveHighScore() {
   // save form data as an object
   const score = {
     initialsInput: initialsInput.value,
-    secondsLeft: secondsLeft.value
   };
   initials.push(score);
   // Use .setItem() to store object in storage and JSON.stringify to convert it as a string - setting the whole array as 'scores'
