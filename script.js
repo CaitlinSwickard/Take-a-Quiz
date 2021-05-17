@@ -23,40 +23,40 @@ const questions = [
   {
     question: 'Which one is a value for a boolean?',
     choices: [
-      'True',
-      'Math.random',
-      'Function',
-      'Loop',
+      '1. True',
+      '2. Math.random',
+      '3. Function',
+      '4. Loop',
     ],
     correct: 'True'
   },
   {
     question: 'How do we start flex box in css?',
     choices: [
-      'align-self: flex-start',
-      'display: flex',
-      'flex-direction: row',
-      'flex-wrap: wrap',
+      '1. align-self: flex-start',
+      '2. display: flex',
+      '3. flex-direction: row',
+      '4. flex-wrap: wrap',
     ],
     correct: 'display: flex'
   },
   {
     question: 'How do we include jQuery in our webpage?',
     choices: [
-      'With a NDC',
-      'With a function',
-      'With a CDN',
-      'With a method',
+      '1. With a NDC',
+      '2. With a function',
+      '3. With a CDN',
+      '4. With a method',
     ],
     correct: 'With a CDN',
   },
   {
     question: 'What does DOM stand for?',
     choices: [
-      'Document Object Method',
-      'Document Object Menu',
-      'Document Object Motherboard',
-      'Document Object Model',
+      '1. Document Object Method',
+      '2. Document Object Menu',
+      '3. Document Object Motherboard',
+      '4. Document Object Model',
     ],
     correct: 'Document Object Model',
   }
@@ -86,11 +86,9 @@ startButton.addEventListener('click', startQuiz);
 
 // function to start the quiz and timer 
 function startQuiz() {
-
   secondsLeft = 60;
   // hides the instruction screen to allow questions to display
   instructionContainerElement.style.display = "none";
-
   showQuestions();
 }
 
@@ -165,7 +163,7 @@ function quizEnd() {
 // variables fo HTML elements for high score form
 const submitEl = document.querySelector("#submit");
 const initialsInput = document.querySelector("#initials");
-const scoreListEl = document.querySelector("#score-list");
+const scoreListEl = document.querySelector("#scores-list");
 const scoreContainerEl = document.getElementById("score-container");
 
 
@@ -174,47 +172,56 @@ const scoreContainerEl = document.getElementById("score-container");
 submitEl.addEventListener("click", function (event) {
   // Prevent default action of refresh on submit
   event.preventDefault();
+  init();
 });
+
+
+
+// set empty array for initials 
+let initials = [];
+
+function setScores() {
+
+  // setting html to empty string 
+  scoreListEl.innerHTML = "";
+  // looping through initials
+  for (var i = 0; i < initials.length; i++) {
+    // creating a variable for the current iteration
+    var initial = initials[i].initialsInput;
+    // creating 'h3' element
+    var h3 = document.createElement("h3");
+    // changing the text of the 'h3' created to the current text of the loop iteration
+    h3.textContent = initial;
+    // appending the 'h3' as a child to the html element
+    scoreListEl.appendChild(h3);
+  }
+}
 
 
 
 function saveHighScore() {
 
   // save form data as an object
-  const scores = {
+  const score = {
     initialsInput: initialsInput.value,
     secondsLeft: secondsLeft.value
   };
+  initials.push(score);
   // Use .setItem() to store object in storage and JSON.stringify to convert it as a string - setting the whole array as 'scores'
-  localStorage.setItem("scores", JSON.stringify(scores));
+  localStorage.setItem("scores", JSON.stringify(initials));
 }
 
 
+function init() {
 
-function setScores() {
-
-  // array for value from local storage or initialize an empty array
-  var highScores = JSON.parse(localStorage.getItem("scores") || [])
-  // Check if data is returned, if not exit out of the function
+  // getting the stored 'initials' saved in local storage, turning it from a string to an array and saving it to variable
+  var highScores = JSON.parse(localStorage.getItem("scores"))
+  // if we have initials in local storage, set the 'initials' variable to what we received from local storage
   if (highScores !== null) {
-    const response = initialsInput.value + " " + secondsLeft.value;
-    scoreListEl.textContent = response;
-    //this pushes that string into the array
-    highScores.push(response);
-  } else {
-    return;
+    initials = highScores;
   }
-
+  // calling function from above
   saveHighScore();
   setScores();
 }
-
-
-
-
-
-
-
-
-
 

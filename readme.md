@@ -1,6 +1,6 @@
 # Project: Take A Quiz
 
-This project allows for a student to take a quiz on coding fundamental. This quiz is timed with 60 second to complete. The timer and the quiz start when the user clicks the button. The user can go through the questions one by one. If they answer a question wrong they will lose 10 second on the clock. When the quiz is over, the user is prompted to input their initials to be placed with their score, which is the time left on the clock.
+This project allows for a student to take a quiz on coding fundamental. This quiz is timed with 60 second to complete. The timer and the quiz start when the user clicks the button. The user can go through the questions one by one. If they answer a question wrong they will lose 10 second on the clock. When the quiz is over, the user is prompted to input their initials to be placed with their score, which is the time left on the clock. Once submitted you can see the previous players of the quiz.
 
 ### Criteria
 
@@ -27,6 +27,6 @@ This project allows for a student to take a quiz on coding fundamental. This qui
 
 ## Screen Shots
 
-![Start Quiz screen](images/Quizstart.png)
+![Start Quiz screen](images/startQuiz.png)
 ![Random question in quiz](images/Question.png)
-![End quiz screen](images/Quizend.png)
+![End quiz screen](images/endQuiz.png)
