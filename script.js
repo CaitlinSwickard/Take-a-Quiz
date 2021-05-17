@@ -1,9 +1,8 @@
-// possible css values - not working 
-// document.getElementById('question-container').style.cssText = "padding: 30px 30px; margin: auto; display: flex; width: 100vh; height: 80vh; justify-content: center; flex-direction: column; align-items: center;"
-// document.getElementById('score-container').style.cssText = "padding: 30px 30px; margin: auto; display: flex; width: 100vh; height: 80vh; justify-content: center; flex-direction: column; align-items: center;"
+// css values 
+document.getElementById('question').style.cssText = "background: #192a3b; color: white; padding: 10px 10px; margin: auto; display: flex; justify-content: center; flex-direction: column; align-items: center; width: 100vh;"
+document.getElementById('choices').style.cssText = "background: #192a3b; color: white; padding: 10px 10px; margin: auto; display: flex; justify-content: center; flex-direction: column; align-items: center; width: 100vh;"
 
-
-
+document.querySelector('.score-contents').style.cssText = "background: #192a3b; color: white; padding: 30px 30px; margin: auto; display: flex; justify-content: center; flex-direction: column; align-items: center; width: 100vh; height: 60vh;"
 
 
 
@@ -65,8 +64,6 @@ const questions = [
 
 
 
-
-
 let secondsLeft;
 // function to start timer set in a variable
 let timerInterval = setInterval(function () {
@@ -84,6 +81,7 @@ let timerInterval = setInterval(function () {
 
 // event listener for click to start quiz
 startButton.addEventListener('click', startQuiz);
+
 
 
 // function to start the quiz and timer 
@@ -128,14 +126,13 @@ function showQuestions() {
 }
 
 
+
 function setNextQuestion() {
 
   // sets index for next question
   showQuestions(questions[currentQuestionIndex++]);
   console.log(currentQuestionIndex);
 }
-
-
 
 
 
@@ -153,7 +150,6 @@ checkAnswer('True');
 
 
 
-
 // stops timer function 
 function quizEnd() {
 
@@ -165,9 +161,8 @@ function quizEnd() {
   choiceElement.innerHTML = "";
   questionElement.innerHTML = "";
   // calls on score form to be filled out
-  highScores();
+  saveHighScore();
 }
-
 
 
 
@@ -181,15 +176,20 @@ const scoreContainerEl = document.getElementById("score-container");
 
 function saveHighScore() {
 
+  // Add listener event to submit button
+  submitEl.addEventListener("click", function (event) {
+    // Prevent default action of refresh on submit
+    event.preventDefault();
+  });
+
   // save form data as an object
   const scores = {
     initialsInput: initialsInput.value,
     secondsLeft: secondsLeft.value
   };
+  // Use .setItem() to store object in storage and JSON.stringify to convert it as a string - setting the whole array as 'scores'
+  localStorage.setItem("scores", JSON.stringify(scores));
 }
-// Use .setItem() to store object in storage and JSON.stringify to convert it as a string - setting the whole array as 'scores'
-localStorage.setItem("scores", JSON.stringify(scores));
-
 
 
 
@@ -206,39 +206,15 @@ function setScores() {
   } else {
     return;
   }
-  // Add listener event to submit button
-  submitEl.addEventListener("click", function (event) {
-    // Prevent default action of refresh on submit
-    event.preventDefault();
-    saveHighScore();
-    setScores();
-  });
+
+  saveHighScore();
+  setScores();
 }
 
 
 
 
 
-
-
-
-
-  // // function to capture initials and score (time left on clock)
-  // function highScores(event) {
-  //   // removes hide to display final screen
-  //   scoreContainerEl.classList.remove("hide");
-  //   // Prevent default action
-  //   event.preventDefault();
-  //   console.log(event);
-  //   // shows initials and score (time left on clock)
-  //   const response = initialsInput.value + " " + secondsLeft;
-  //   scoreListEl.textContent = response;
-  //   console.log(response);
-  //   // store to local storage??
-  //   localStorage.setItem(response, secondsLeft);
-  // }
-  // // Add listener to submit 
-  // submitEl.addEventListener("click", highScores);
 
 
 
