@@ -64,7 +64,7 @@ const questions = [
 
 
 
-
+let secondsLeft;
 // function to start timer set in a variable
 let timerInterval = setInterval(function () {
   secondsLeft--;
