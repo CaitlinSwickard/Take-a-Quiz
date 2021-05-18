@@ -191,7 +191,7 @@ function setScores() {
     // creating 'h3' element
     var h3 = document.createElement("h3");
     // changing the text of the 'h3' created to the current text of the loop iteration
-    h3.textContent = initial;
+    h3.textContent = initial + " " + secondsLeft;
     // appending the 'h3' as a child to the html element
     scoreListEl.appendChild(h3);
   }
